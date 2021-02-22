@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 //API SECURITY
-app.use(helmet());
+// app.use(helmet());
 //handle CORS error
 app.use(cors());
 

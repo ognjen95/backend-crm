@@ -1,0 +1,23 @@
+### User sing up endpoint
+
+POST http://localhost:5000/v1/user
+Content-Type: application/json
+
+{
+	"name":"Ognjen Atlagic",
+	"company" : "Company doo",
+	"adress": "Brace Kovac 62",
+	"phone":"+06553043",
+	"email": "at2lagicognje2n1@gmail.com",
+	"password":"1234saf56s"
+}
+
+### User sing in endpoint
+
+POST http://localhost:5000/v1/user/login
+Content-Type: application/json
+
+{
+	"email": "at2lagicognje2n1@gmail.com",
+	"password":"1234saf56s"
+}
