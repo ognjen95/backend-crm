@@ -7,9 +7,9 @@ Content-Type: application/json
 	"name":"Ognjen Atlagic",
 	"company" : "Company doo",
 	"adress": "Brace Kovac 62",
-	"phone":"+06553043",
-	"email": "at2lagicognje2n1@gmail.com",
-	"password":"1234saf56s"
+	"phone":"+381694074955",
+	"email": "atlagicognjen@gmail.com",
+	"password":"12345678"
 }
 
 ### User sing in endpoint
@@ -18,6 +18,21 @@ POST http://localhost:5000/v1/user/login
 Content-Type: application/json
 
 {
-	"email": "at2lagicognje2n1@gmail.com",
-	"password":"1234saf56s"
+	"email": "atlagicognjen@gmail.com",
+	"password":"12345678"
+}
+
+### Get user profile, private
+GET http://localhost:5000/v1/user/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0MDc1MDg4LCJleHAiOjE2MTY2NjcwODh9.giAOXyMytz531wc5NPH7XD-N5z890UoS3F7LfqOjp3c
+
+
+### reset password
+
+POST http://localhost:5000/v1/user/reset-password
+Content-Type: application/json
+
+{
+	"email": "atlagicognjen@gmail.com"
 }
