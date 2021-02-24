@@ -45,12 +45,19 @@ const getUserByEmail = (email) => {
   });
 };
 
-const savePin = (userObj) => {
+const updatePassword = (email, newhashedPass) => {
   return new Promise((resolve, reject) => {
-    UserSchema(userObj)
-      .save()
+    UserSchema.findOneAndUpdate(
+      { email },
+      { $set: { password: newhashedPass } },
+      { new: true }
+    )
       .then((data) => resolve(data))
-      .then((err) => reject(err));
+      .catch((error) => {
+        console.log(error);
+        reject(error);
+      });
   });
 };
-module.exports = { insertUser, getUserByEmail, getUserById };
+
+module.exports = { insertUser, getUserByEmail, getUserById, updatePassword };

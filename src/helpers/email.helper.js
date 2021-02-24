@@ -28,18 +28,29 @@ const sendPinEmail = (info) => {
   });
 };
 
-const emailProcessor = async (email, pin) => {
-  const info = {
-    from: process.env.EMAIL, // sender address
-    to: email, // list of receivers
-    subject: 'Password Reset PIN ✔', // Subject line
-    text: `Here is Your PIN : ${pin}, this pin will expire in 1 day`, // plain text body
-    html: `
-        <b> Here is Your pin for password reset: ${pin}</b>
-        <p>This pin will expire in 1 day</>  `, // html body
-  };
-
-  sendPinEmail(info);
+const emailProcessor = async ({ email, pin, type }) => {
+  if (type === 'send-pin') {
+    const info = {
+      from: process.env.EMAIL, // sender address
+      to: email, // list of receivers
+      subject: 'Password Reset PIN ✔', // Subject line
+      text: `Here is Your PIN : ${pin}, this pin will expire in 1 day`, // plain text body
+      html: `
+          <b> Here is Your pin for password reset: ${pin}</b>
+          <p>This pin will expire in 1 day</>  `, // html body
+    };
+    sendPinEmail(info);
+  } else if (type === 'password-reset-success') {
+    const info = {
+      from: process.env.EMAIL, // sender address
+      to: email, // list of receivers
+      subject: 'Password reseted successfuly ✔', // Subject line
+      text: `Your password has been updated`, // plain text body
+      html: `
+          <b>Your password has been updated</b>`,
+    };
+    sendPinEmail(info);
+  }
 };
 
 module.exports = { emailProcessor };

@@ -12,8 +12,37 @@ const setPasswordResetPin = (email) => {
     ResetPinSchema(resetObj)
       .save()
       .then((data) => resolve(data))
-      .then((err) => reject(err));
+      .catch((err) => reject(err));
   });
 };
 
-module.exports = { setPasswordResetPin };
+const checkEmailAndPin = (email, pin) => {
+  return new Promise((resolve, reject) => {
+    try {
+      ResetPinSchema.findOne({ email, pin }, (err, data) => {
+        if (err) {
+          console.log(err);
+          resolve(false);
+        }
+        resolve(data);
+      });
+    } catch (error) {
+      reject(error);
+      console.log(error);
+    }
+  });
+};
+
+const deletePin = (email, pin) => {
+  try {
+    ResetPinSchema.findOneAndDelete({ email, pin }, (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { setPasswordResetPin, checkEmailAndPin, deletePin };

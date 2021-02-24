@@ -5,8 +5,6 @@ const createAccessJWT = (email) => {
     expiresIn: '30d',
   });
 
-  // await localStorage.setItem('userInfo', JSON.stringify(accessJWT));
-
   return Promise.resolve(accessJWT);
 };
 

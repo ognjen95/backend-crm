@@ -19,13 +19,13 @@ Content-Type: application/json
 
 {
 	"email": "atlagicognjen@gmail.com",
-	"password":"12345678"
+	"password":"newpasssword123"
 }
 
 ### Get user profile, private
 GET http://localhost:5000/v1/user/profile
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0MDc1MDg4LCJleHAiOjE2MTY2NjcwODh9.giAOXyMytz531wc5NPH7XD-N5z890UoS3F7LfqOjp3c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0MTcxMDQ2LCJleHAiOjE2MTY3NjMwNDZ9.osjHOoA11atdGQWQikNT2xpXcAXOT-SedTI81qkb2WE
 
 
 ### reset password
@@ -35,4 +35,17 @@ Content-Type: application/json
 
 {
 	"email": "atlagicognjen@gmail.com"
+}
+
+
+
+### update new pass
+
+PATCH http://localhost:5000/v1/user/reset-password
+Content-Type: application/json
+
+{
+	"email": "atlagicognjen@gmail.com",
+	"pin": "794956",
+	"newPassword" : "123456789"
 }
