@@ -5,7 +5,7 @@ const insertUser = (userObj) => {
     UserSchema(userObj)
       .save()
       .then((data) => resolve(data))
-      .then((err) => reject(err));
+      .catch((err) => reject(err));
   });
 };
 

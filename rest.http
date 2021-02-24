@@ -4,12 +4,12 @@ POST http://localhost:5000/v1/user
 Content-Type: application/json
 
 {
-	"name":"Ognjen Atlagic",
-	"company" : "Company doo",
-	"adress": "Brace Kovac 62",
+	"name":"Servisni savjetnik",
+	"company" : "MAG Centar",
+	"adress": "Nedje na NBGd",
 	"phone":"+381694074955",
-	"email": "atlagicognjen@gmail.com",
-	"password":"12345678"
+	"email": "mag.serviser@gmail.com",
+	"password":"123456789"
 }
 
 ### User sing in endpoint
@@ -49,3 +49,26 @@ Content-Type: application/json
 	"pin": "794956",
 	"newPassword" : "123456789"
 }
+
+
+### TIKETI
+
+### post tiket
+
+POST http://localhost:5000/v1/ticket
+Content-Type: application/json
+
+{
+	"drzava":"Srbija",
+    "prodavac":"TCB",
+    "oblasti":"Sales",
+   "prioritet":"Srednji",
+    "cc":[{"email":"ognjenatlagic@gmail.com"}],
+   "ticket":"Text tiketa",
+    "napomena":"Klijent je gej",
+    "ime":"Stefan",
+    "broj":"555333",
+    "email":"klijent@gmail.com",
+    "vin":"12345678901111k23"
+}
+

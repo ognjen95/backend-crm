@@ -9,7 +9,7 @@ const UserSchema = new Schema({
   },
   company: { type: String, maxlength: 50, required: true },
   adress: { type: String, maxlength: 50 },
-  phone: { type: Number, maxlength: 15 },
+  phone: { type: Number, maxlength: 20 },
   email: { type: String, maxlength: 50, required: true },
   password: { type: String, maxlength: 100, minlength: 8, required: true },
 });
