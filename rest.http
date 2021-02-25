@@ -77,8 +77,35 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFna
 
 ### get all tikets.
 
-GET http://localhost:5000/v1/ticket
+GET http://localhost:5000/v1/ticket/all-tickets
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
 
 
+### get ticket by ID
+
+GET http://localhost:5000/v1/ticket/6037e837393608019ccfd423
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
+
+### update ticket, send MSG
+
+PUT http://localhost:5000/v1/ticket/6037e837393608019ccfd423
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
+
+{
+	"message": "IDEEMO LEEZBEEEJKEE"
+}
+
+### update ticket status to closed
+
+PATCH  http://localhost:5000/v1/ticket/6037e837393608019ccfd423
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
+
+### delete ticket status to closed
+
+DELETE  http://localhost:5000/v1/ticket/6037e837393608019ccfd423
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
