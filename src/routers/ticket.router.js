@@ -134,22 +134,20 @@ router.put('/:ticketId', protect, async (req, res) => {
 
 //Update ticket status closed
 
-router.patch('/:ticketId', protect, async (req, res) => {
+router.patch('/close-ticket/:ticketId', protect, async (req, res) => {
   try {
     const ticketId = req.params.ticketId;
 
     const user = req.user; // from middleware
     const ticket = await getTicketById(ticketId, user._id);
 
-    console.log(ticket[0].status);
-    ticket[0].conversation.length < 2 &&
-      res.json({ status: 'You must answer first to close ticket' });
-
-    const ticketStatusClosed = await closeTicket(ticketId, user._id);
+    if (ticket[0].conversation.length < 2)
+      return res.json({ status: 'You must answer first to close ticket' });
 
     if (ticketStatusClosed.status.toLowerCase().trim() === 'zatvoren') {
       return res.json({ status: 'Ticket is already closed' });
     }
+    const ticketStatusClosed = await closeTicket(ticketId, user._id);
 
     if (ticketStatusClosed._id) {
       return res.json({ status: 'Ticket is closed sucessfuly' });
