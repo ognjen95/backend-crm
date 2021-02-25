@@ -7,6 +7,7 @@ const TicketSchema = new Schema({
     required: true,
     ref: 'User',
   },
+
   drzava: {
     type: String,
     maxlength: 50,

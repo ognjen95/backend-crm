@@ -27,7 +27,17 @@ router.all('/', (req, res, next) => {
 
 // sing up user
 router.post('/', async (req, res) => {
-  const { name, company, adress, phone, email, password } = req.body;
+  const {
+    name,
+    company,
+    adress,
+    phone,
+    email,
+    isAdmin,
+    userRole,
+    password,
+  } = req.body;
+
   try {
     const hashedPassoword = await hashPassword(password);
     const newUserObj = {
@@ -36,6 +46,8 @@ router.post('/', async (req, res) => {
       adress,
       phone,
       email,
+      userRole,
+      isAdmin,
       password: hashedPassoword,
     };
 

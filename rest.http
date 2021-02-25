@@ -4,11 +4,13 @@ POST http://localhost:5000/v1/user
 Content-Type: application/json
 
 {
-	"name":"Servisni savjetnik",
-	"company" : "MAG Centar",
-	"adress": "Nedje na NBGd",
+	"name":"Ognjen",
+ 	"userRole":{"operater":true},
+	"drzava":"Srbija",
+	"company" : "Live chat",
+	"adress": "Nedje u BGD",
 	"phone":"+381694074955",
-	"email": "mag.serviser@gmail.com",
+	"email": "atlagicognjen@gmail.com",
 	"password":"123456789"
 }
 
@@ -19,13 +21,13 @@ Content-Type: application/json
 
 {
 	"email": "atlagicognjen@gmail.com",
-	"password":"newpasssword123"
+	"password":"123456789"
 }
 
 ### Get user profile, private
 GET http://localhost:5000/v1/user/profile
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0MTcxMDQ2LCJleHAiOjE2MTY3NjMwNDZ9.osjHOoA11atdGQWQikNT2xpXcAXOT-SedTI81qkb2WE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
 
 
 ### reset password
@@ -46,17 +48,18 @@ Content-Type: application/json
 
 {
 	"email": "atlagicognjen@gmail.com",
-	"pin": "794956",
-	"newPassword" : "123456789"
+	"pin": "960305",
+	"newPassword" : "12345678"
 }
 
 
-### TIKETI
+### ### ### ### ### TIKETI ### ### ### ### ### ### 
 
 ### post tiket
 
 POST http://localhost:5000/v1/ticket
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
 
 {
 	"drzava":"Srbija",
@@ -65,10 +68,17 @@ Content-Type: application/json
    "prioritet":"Srednji",
     "cc":[{"email":"ognjenatlagic@gmail.com"}],
    "ticket":"Text tiketa",
-    "napomena":"Klijent je gej",
+    "napomena":"Klijent je gejKlijent je gejKlijent je gej",
     "ime":"Stefan",
     "broj":"555333",
     "email":"klijent@gmail.com",
     "vin":"12345678901111k23"
 }
+
+### get all tikets.
+
+GET http://localhost:5000/v1/ticket
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
+
 
