@@ -9,6 +9,10 @@ const {
   deleteTicket,
 } = require('../model/ticket/ticket.model');
 const protect = require('../middleware/authMiddleware');
+const {
+  createNewTicketValidation,
+  replyMessageValidation,
+} = require('../middleware/joiValidation.middleware');
 
 router.all('/', (req, res, next) => {
   // res.json({ message: 'Ticket router' });
@@ -17,7 +21,7 @@ router.all('/', (req, res, next) => {
 });
 
 //create new ticket, proteccted
-router.post('/', protect, async (req, res) => {
+router.post('/', protect, createNewTicketValidation, async (req, res) => {
   try {
     const {
       drzava,
@@ -41,6 +45,7 @@ router.post('/', protect, async (req, res) => {
       prodavac,
       oblasti,
       prioritet,
+      // za,
       cc,
       ticket,
       napomena,
@@ -104,7 +109,7 @@ router.get('/:ticketId', protect, async (req, res) => {
 });
 
 //add new message
-router.put('/:ticketId', protect, async (req, res) => {
+router.put('/:ticketId', protect, replyMessageValidation, async (req, res) => {
   try {
     const { sender, message } = req.body;
 

@@ -65,9 +65,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFna
 	"drzava":"Srbija",
     "prodavac":"TCB",
     "oblasti":"Sales",
-   "prioritet":"Srednji",
+    "prioritet":"Srednji",
+	///za:atlagicognjen@gmail,com
     "cc":[{"email":"ognjenatlagic@gmail.com"}],
-   "ticket":"Text tiketa",
+    "ticket":"Text tiketa",
     "napomena":"Klijent je gejKlijent je gejKlijent je gej",
     "ime":"Stefan",
     "broj":"555333",
@@ -90,7 +91,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFna
 
 ### update ticket, send MSG
 
-PUT http://localhost:5000/v1/ticket/6037e837393608019ccfd423
+PUT http://localhost:5000/v1/ticket/6037eefa279b0c0fd4b92cc2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
 
@@ -100,12 +101,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFna
 
 ### update ticket status to closed
 
-PATCH  http://localhost:5000/v1/ticket/6037e837393608019ccfd423
+PATCH  http://localhost:5000/v1/ticket/close-ticket/6037eefa279b0c0fd4b92cc2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
 
 ### delete ticket status to closed
 
-DELETE  http://localhost:5000/v1/ticket/6037e837393608019ccfd423
+DELETE  http://localhost:5000/v1/ticket/6037eefa279b0c0fd4b92cc2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFnaWNvZ25qZW5AZ21haWwuY29tIiwiaWF0IjoxNjE0Mjc2MTI4LCJleHAiOjE2MTY4NjgxMjh9.meSbihaRtfaj1vE19vpm2Da9RlH6MobLaZIm2Cf2Zp0
