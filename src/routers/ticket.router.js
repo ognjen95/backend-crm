@@ -82,9 +82,9 @@ router.get('/all-tickets', protect, async (req, res) => {
 
     const allTickets = await getTickets(user._id);
 
-    res.json({ result: allTickets });
+    return res.json({ result: allTickets });
   } catch (error) {
-    res.json({
+    return res.json({
       status: 'error',
       msg: error.message,
     });
@@ -99,7 +99,7 @@ router.get('/:ticketId', protect, async (req, res) => {
 
     const ticket = await getTicketById(ticketId, user._id);
 
-    res.json({ result: ticket });
+    return res.json({ result: ticket });
   } catch (error) {
     res.json({
       status: 'error',
@@ -128,7 +128,7 @@ router.put('/:ticketId', protect, replyMessageValidation, async (req, res) => {
       return res.json({ status: 'Message added, ticket updated.' });
     }
 
-    res.json({ error: 'Could not reply' });
+    return res.json({ error: 'Could not reply' });
   } catch (error) {
     res.json({
       status: 'error',

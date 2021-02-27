@@ -21,7 +21,7 @@ Content-Type: application/json
 
 {
 	"email": "atlagicognjen@gmail.com",
-	"password":"123456789"
+	"password":"12345678"
 }
 
 ### Get user profile, private
@@ -48,7 +48,7 @@ Content-Type: application/json
 
 {
 	"email": "atlagicognjen@gmail.com",
-	"pin": "960305",
+	"pin": "666339",
 	"newPassword" : "12345678"
 }
 
@@ -63,7 +63,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFna
 
 {
 	"drzava":"Srbija",
-    "prodavac":"TCB",
+    "prodavac":"MAG",
     "oblasti":"Sales",
     "prioritet":"Srednji",
 	///za:atlagicognjen@gmail,com
@@ -72,7 +72,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0bGFna
     "napomena":"Klijent je gejKlijent je gejKlijent je gej",
     "ime":"Stefan",
     "broj":"555333",
-    "email":"klijent@gmail.com",
+    "email":"ogac@gmail.com",
     "vin":"12345678901111k23"
 }
 

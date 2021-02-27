@@ -52,8 +52,8 @@ router.post('/', async (req, res) => {
     };
 
     const result = await insertUser(newUserObj);
-    console.log(result);
-    res.json({ message: 'New user created', result });
+
+    return res.json({ message: 'New user created', result });
   } catch (error) {
     console.log(error);
     res.json({ status: 'error', message: error.message });
@@ -66,7 +66,7 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.json({ status: 'Error', message: 'Invalid form submission' });
+    return res.json({ status: 'error', message: 'Invalid form submission' });
   }
 
   const user = await getUserByEmail(email); //get user from dB
@@ -79,7 +79,7 @@ router.post('/login', async (req, res) => {
   const result = await comparePasswords(password, passwordFromDb);
 
   if (!result) {
-    return res.json({ status: 'Error', message: 'Invalid form submission' });
+    return res.json({ status: 'error', message: 'Invalid form submission' });
   }
 
   const accessJWT = await createAccessJWT(user.email);
@@ -101,9 +101,9 @@ router.get('/profile', protect, async (req, res) => {
   const { _id } = req.user; // forwarded from auth middleware
 
   const user = await getUserById(_id);
-  console.log(user);
+
   if (user) {
-    res.json({ user });
+    return res.json({ user });
   } else {
     res.status(404);
     throw new Error('User not found');
@@ -118,18 +118,22 @@ router.post('/reset-password', resetPasswordValidation, async (req, res) => {
     const user = await getUserByEmail(email);
 
     if (!user && !user._id)
-      res.json({
+      return res.json({
         status: 'error',
         message: 'We can not send You PIN right now, try again later.',
       });
 
     const setPin = await setPasswordResetPin(user.email);
 
-    if (!setPin) res.json({ status: 'error', Message: 'Can not send pin' });
+    if (!setPin)
+      return res.json({ status: 'error', Message: 'Can not send pin' });
 
     emailProcessor({ email, pin: setPin.pin, type: 'send-pin' });
 
-    res.json({ msg: 'success', msg: 'Pin is sent to Your email adress' });
+    return res.json({
+      msg: 'success',
+      msg: 'Pin is sent to Your email adress',
+    });
   } catch (error) {
     console.log(error);
     res.json({
