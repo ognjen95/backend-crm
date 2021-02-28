@@ -28,12 +28,8 @@ const TicketSchema = new Schema({
     maxlength: 50,
     required: true,
   },
-  cc: [
-    {
-      name: { type: String },
-      email: { type: String, required: true, maxlength: 50 },
-    },
-  ],
+  cc: { type: String, maxlength: 50 },
+
   ticket: {
     type: String,
     maxlength: 2000,
@@ -82,6 +78,10 @@ const TicketSchema = new Schema({
         maxlength: 2000,
         required: true,
         default: '',
+      },
+      isOperater: {
+        type: Boolean,
+        required: true,
       },
       msgAt: {
         type: Date,

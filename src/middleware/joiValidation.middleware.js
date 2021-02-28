@@ -1,8 +1,10 @@
 const Joi = require('joi');
 
-const email = Joi.string().email({
-  minDomainSegments: 2,
-});
+const email = Joi.string()
+  .email({
+    minDomainSegments: 2,
+  })
+  .allow('');
 
 const pin = Joi.string().min(6).max(6).required();
 const newPassword = Joi.string().min(8).max(100).required();
@@ -10,13 +12,17 @@ const drzava = Joi.string().min(2).max(50).required();
 const prodavac = Joi.string().min(2).max(50).required();
 const oblasti = Joi.string().min(2).max(50).required();
 const prioritet = Joi.string().min(2).max(50).required();
-const cc = Joi.array();
+const cc = Joi.string()
+  .email({
+    minDomainSegments: 2,
+  })
+  .allow('');
 const ticket = Joi.string().min(1).max(2000).required();
-const napomena = Joi.string().max(1000);
-const ime = Joi.string().min(2).max(50);
-const broj = Joi.number();
+const napomena = Joi.string().allow('');
+const ime = Joi.string().min(2).max(50).allow('');
+const broj = Joi.string().allow('');
 const message = Joi.string().min(1).max(2000).required();
-const vin = Joi.string().min(17).max(17);
+const vin = Joi.string().min(17).max(17).allow('');
 
 ////////////////////////////////////
 

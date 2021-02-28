@@ -88,6 +88,7 @@ router.post('/login', async (req, res) => {
   res.json({
     status: 'success',
     message: 'Login Success',
+    user,
     name: user.name,
     email: user.email,
     accessJWT,

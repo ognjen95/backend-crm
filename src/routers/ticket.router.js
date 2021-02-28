@@ -7,6 +7,8 @@ const {
   ReplyMessage,
   closeTicket,
   deleteTicket,
+  getTicketsFromAllUsers,
+  getTicketById2,
 } = require('../model/ticket/ticket.model');
 const protect = require('../middleware/authMiddleware');
 const {
@@ -38,7 +40,6 @@ router.post('/', protect, createNewTicketValidation, async (req, res) => {
     } = req.body;
 
     const user = req.user; // from middleware
-
     const ticketObj = {
       userId: req.user._id,
       drzava,
@@ -53,15 +54,23 @@ router.post('/', protect, createNewTicketValidation, async (req, res) => {
       broj,
       email,
       vin,
-      conversation: [{ sender: user.name, message: ticket }],
+      conversation: [
+        {
+          sender: user.name,
+          message: ticket,
+          isOperater: user.userRole[0].operater,
+        },
+      ],
     };
-
-    console.log(req.user);
 
     const savedTicket = await insertTicket(ticketObj);
 
     if (savedTicket._id)
-      return res.json({ status: '200', msg: 'New ticket created !' });
+      return res.json({
+        status: '200',
+        msg: 'New ticket created !',
+        ticket: ticketObj,
+      });
 
     res.json({
       status: 'error',
@@ -80,9 +89,9 @@ router.get('/all-tickets', protect, async (req, res) => {
   try {
     const user = req.user; // from middleware
 
-    const allTickets = await getTickets(user._id);
-
-    return res.json({ result: allTickets });
+    // const allTickets = await getTickets(user._id);
+    const allTickets = await getTicketsFromAllUsers(user);
+    return res.json({ result: allTickets, user });
   } catch (error) {
     return res.json({
       status: 'error',
@@ -91,15 +100,16 @@ router.get('/all-tickets', protect, async (req, res) => {
   }
 });
 
-//get all tickets , proteccted
+//get specific tickets, proteccted
 router.get('/:ticketId', protect, async (req, res) => {
   try {
     const ticketId = req.params.ticketId;
     const user = req.user; // from middleware
 
-    const ticket = await getTicketById(ticketId, user._id);
+    // const ticket = await getTicketById(ticketId, user);
+    const ticket = await getTicketById2(ticketId, user);
 
-    return res.json({ result: ticket });
+    return res.json({ result: ticket, user });
   } catch (error) {
     res.json({
       status: 'error',
@@ -119,9 +129,9 @@ router.put('/:ticketId', protect, replyMessageValidation, async (req, res) => {
 
     const ticket = await ReplyMessage({
       ticketId,
-      userId,
       message,
       sender: user.name,
+      user,
     });
 
     if (ticket._id) {
@@ -144,15 +154,19 @@ router.patch('/close-ticket/:ticketId', protect, async (req, res) => {
     const ticketId = req.params.ticketId;
 
     const user = req.user; // from middleware
-    const ticket = await getTicketById(ticketId, user._id);
+    const ticket = await getTicketById2(ticketId, user);
 
     if (ticket[0].conversation.length < 2)
-      return res.json({ status: 'You must answer first to close ticket' });
+      return res.json({
+        status: 'You must answer first to close ticket',
+        ticket,
+      });
 
-    if (ticketStatusClosed.status.toLowerCase().trim() === 'zatvoren') {
+    if (ticket[0].status.toLowerCase().trim() === 'zatvoren') {
       return res.json({ status: 'Ticket is already closed' });
     }
-    const ticketStatusClosed = await closeTicket(ticketId, user._id);
+
+    const ticketStatusClosed = await closeTicket(ticketId);
 
     if (ticketStatusClosed._id) {
       return res.json({ status: 'Ticket is closed sucessfuly' });

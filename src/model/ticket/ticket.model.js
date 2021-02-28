@@ -26,6 +26,19 @@ const getTickets = (userId) => {
     }
   });
 };
+// get send and recieved tickets for specific user
+const getTicketsFromAllUsers = ({ _id, email }) => {
+  return new Promise((resolve, reject) => {
+    try {
+      TicketSchema.find({ $or: [{ userId: _id }, { cc: email }] })
+        .then((data) => resolve(data))
+        .catch((err) => reject(err));
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+};
 
 const getTicketById = (_id, userId) => {
   return new Promise((resolve, reject) => {
@@ -40,15 +53,37 @@ const getTicketById = (_id, userId) => {
   });
 };
 
-const ReplyMessage = ({ ticketId, userId, message, sender }) => {
+const getTicketById2 = (_id, user) => {
+  return new Promise((resolve, reject) => {
+    try {
+      TicketSchema.find({
+        $or: [
+          { _id, userId: user._id },
+          { _id, cc: user.email },
+        ],
+      })
+        .then((data) => resolve(data))
+        .catch((err) => reject(err));
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+};
+
+const ReplyMessage = ({ ticketId, message, sender, user }) => {
   return new Promise((resolve, reject) => {
     try {
       TicketSchema.findOneAndUpdate(
-        { _id: ticketId, userId },
+        { _id: ticketId },
         {
           status: 'Otvoren',
           $push: {
-            conversation: { message, sender },
+            conversation: {
+              message,
+              sender,
+              isOperater: user.userRole[0].operater,
+            },
           },
         },
         { new: true }
@@ -62,11 +97,11 @@ const ReplyMessage = ({ ticketId, userId, message, sender }) => {
   });
 };
 
-const closeTicket = (_id, userId) => {
+const closeTicket = (_id) => {
   return new Promise((resolve, reject) => {
     try {
       TicketSchema.findOneAndUpdate(
-        { _id, userId },
+        { _id },
         {
           status: 'Zatvoren',
         },
@@ -75,7 +110,6 @@ const closeTicket = (_id, userId) => {
         .then((data) => resolve(data))
         .catch((err) => reject(err));
     } catch (error) {
-      console.log(error);
       reject(error);
     }
   });
@@ -101,4 +135,6 @@ module.exports = {
   ReplyMessage,
   closeTicket,
   deleteTicket,
+  getTicketsFromAllUsers,
+  getTicketById2,
 };
