@@ -14,23 +14,25 @@ const insertTicket = (ticketObj) => {
   });
 };
 
-const getTickets = (userId) => {
-  return new Promise((resolve, reject) => {
-    try {
-      TicketSchema.find({ userId })
-        .then((data) => resolve(data))
-        .catch((err) => reject(err));
-    } catch (error) {
-      console.log(error);
-      reject(error);
-    }
-  });
-};
+// const getTickets = (userId) => {
+//   return new Promise((resolve, reject) => {
+//     try {
+//       TicketSchema.find({ userId })
+//         .sort({ openAt: -1 })
+//         .then((data) => resolve(data))
+//         .catch((err) => reject(err));
+//     } catch (error) {
+//       console.log(error);
+//       reject(error);
+//     }
+//   });
+// };
 // get send and recieved tickets for specific user
-const getTicketsFromAllUsers = ({ _id, email }) => {
+const getTickets = ({ _id, email }) => {
   return new Promise((resolve, reject) => {
     try {
       TicketSchema.find({ $or: [{ userId: _id }, { cc: email }] })
+        .sort({ openAt: -1 })
         .then((data) => resolve(data))
         .catch((err) => reject(err));
     } catch (error) {
@@ -135,6 +137,5 @@ module.exports = {
   ReplyMessage,
   closeTicket,
   deleteTicket,
-  getTicketsFromAllUsers,
   getTicketById2,
 };

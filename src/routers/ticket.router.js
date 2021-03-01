@@ -7,7 +7,7 @@ const {
   ReplyMessage,
   closeTicket,
   deleteTicket,
-  getTicketsFromAllUsers,
+
   getTicketById2,
 } = require('../model/ticket/ticket.model');
 const protect = require('../middleware/authMiddleware');
@@ -89,8 +89,8 @@ router.get('/all-tickets', protect, async (req, res) => {
   try {
     const user = req.user; // from middleware
 
-    // const allTickets = await getTickets(user._id);
-    const allTickets = await getTicketsFromAllUsers(user);
+    const allTickets = await getTickets(user);
+
     return res.json({ result: allTickets, user });
   } catch (error) {
     return res.json({
@@ -158,18 +158,21 @@ router.patch('/close-ticket/:ticketId', protect, async (req, res) => {
 
     if (ticket[0].conversation.length < 2)
       return res.json({
-        status: 'You must answer first to close ticket',
-        ticket,
+        status: 'error',
+        msg: 'You must answer first to close ticket',
       });
 
     if (ticket[0].status.toLowerCase().trim() === 'zatvoren') {
-      return res.json({ status: 'Ticket is already closed' });
+      return res.json({ status: 'error', msg: 'Ticket is already closed' });
     }
 
     const ticketStatusClosed = await closeTicket(ticketId);
 
     if (ticketStatusClosed._id) {
-      return res.json({ status: 'Ticket is closed sucessfuly' });
+      return res.json({
+        status: 'success',
+        msg: 'Ticket is closed sucessfuly',
+      });
     }
 
     res.json({ error: 'Could not close ticket' });
