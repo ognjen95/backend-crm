@@ -1,1 +1,1 @@
-app demo video: https://youtu.be/jM8KMaxo2HY
+App demo video: https://youtu.be/jM8KMaxo2HY
